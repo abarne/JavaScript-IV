@@ -83,11 +83,11 @@ class Student extends Person {
 	}
 	listsSubjects() {
 		for (let i = 0; i < this.favSubjects.length; i++) {
-			return this.favSubjects[i];
+			console.log(this.favSubjects[i]);
 		}
 	}
 	PRAssignment(subject) {
-		return `${this.name} has submitted a PR for ${subject}`;
+		return `${this.name} has submitted a PR for ${subject}.`;
 	}
 	sprintChallenge(subject) {
 		return `${this.name} has begun sprint challenge on ${subject}`;
@@ -107,3 +107,61 @@ class ProjectManager extends Instructor {
 		return `${this.name} debugs ${student.name}'s code on ${subject}.`;
 	}
 }
+
+const fred = new Instructor({
+	name: 'Fred',
+	location: 'Bedrock',
+	age: 37,
+	favLanguage: 'JavaScript',
+	specialty: 'Front-end',
+	catchPhrase: `Don't forget the homies`
+});
+
+const joe = new Instructor({
+	name: 'Joe',
+	location: 'Florida',
+	age: 42,
+	favLanguage: 'JavaScript',
+	specialty: 'Back-end',
+	catchPhrase: `Don't forget to de-bug!`
+});
+
+const steve = new Student({
+	name: 'Steve',
+	location: 'Utah',
+	age: 23,
+	previousBackground: 'Some College',
+	className: 'Web23',
+	favSubjects: [ 'Math', 'Computer Science' ]
+});
+
+const billy = new ProjectManager({
+	name: 'Billy',
+	location: 'Michigan',
+	age: 32,
+	favLanguage: 'JavaScript',
+	spcialty: 'Front-end',
+	catchPrase: `Let's do this!`,
+	gradClassName: 'CS1',
+	favInstructor: 'Sean'
+});
+
+console.log(fred.speak());
+console.log(joe.speak());
+console.log(steve.speak());
+console.log(billy.speak());
+
+console.log(fred.demo('Math'));
+console.log(joe.demo('JavaScript'));
+console.log(billy.demo('Python'));
+
+console.log(fred.grade(steve, 'Math'));
+console.log(joe.grade(steve, 'Math'));
+console.log(billy.grade(steve, 'Math'));
+
+steve.listsSubjects();
+console.log(steve.PRAssignment('JavaScript'));
+console.log(steve.sprintChallenge('JavaScript Knowledge'));
+
+console.log(billy.standUp('Web23-Help'));
+console.log(billy.debugsCode(steve, 'HTML'));
