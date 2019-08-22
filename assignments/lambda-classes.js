@@ -67,10 +67,13 @@ class Instructor extends Person {
 		this.catchPhrase = attrs.catchPhrase;
 	}
 	demo(subject) {
-		return `Today, we are learding about ${subject}`;
+		return `Today, we are learning about ${subject}`;
 	}
 	grade(student, subject) {
 		return `${student.name} receives a perfect score on ${subject}.`;
+	}
+	gradeWork(student) {
+		student.grade += (Math.round(Math.random()) * 2 - 1) * 100;
 	}
 }
 
@@ -80,6 +83,7 @@ class Student extends Person {
 		this.previousBackground = attrs.previousBackground;
 		this.className = attrs.className;
 		this.favSubjects = attrs.favSubjects;
+		this.grade = attrs.grade;
 	}
 	listsSubjects() {
 		for (let i = 0; i < this.favSubjects.length; i++) {
@@ -91,6 +95,13 @@ class Student extends Person {
 	}
 	sprintChallenge(subject) {
 		return `${this.name} has begun sprint challenge on ${subject}`;
+	}
+	graduate() {
+		if (this.grade > 70) {
+			return `${this.name} can graduate!`;
+		} else {
+			return `${this.name} has too low of a grade to graduate.`;
+		}
 	}
 }
 
@@ -132,7 +143,8 @@ const steve = new Student({
 	age: 23,
 	previousBackground: 'Some College',
 	className: 'Web23',
-	favSubjects: [ 'Math', 'Computer Science' ]
+	favSubjects: [ 'Math', 'Computer Science' ],
+	grade: 80
 });
 
 const billy = new ProjectManager({
@@ -165,3 +177,20 @@ console.log(steve.sprintChallenge('JavaScript Knowledge'));
 
 console.log(billy.standUp('Web23-Help'));
 console.log(billy.debugsCode(steve, 'HTML'));
+
+console.log(steve.graduate());
+
+fred.gradeWork(steve);
+console.log(steve.graduate());
+fred.gradeWork(steve);
+console.log(steve.graduate());
+fred.gradeWork(steve);
+console.log(steve.graduate());
+fred.gradeWork(steve);
+console.log(steve.graduate());
+fred.gradeWork(steve);
+console.log(steve.graduate());
+fred.gradeWork(steve);
+console.log(steve.graduate());
+fred.gradeWork(steve);
+console.log(steve.graduate());
