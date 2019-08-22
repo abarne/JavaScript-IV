@@ -73,7 +73,11 @@ class Instructor extends Person {
 		return `${student.name} receives a perfect score on ${subject}.`;
 	}
 	gradeWork(student) {
-		student.grade += (Math.round(Math.random()) * 2 - 1) * 100;
+		let assignment = Math.random() * 180;
+		if (assignment > 100) {
+			assignment = 100;
+		}
+		student.assignments.push(assignment);
 	}
 }
 
@@ -83,6 +87,7 @@ class Student extends Person {
 		this.previousBackground = attrs.previousBackground;
 		this.className = attrs.className;
 		this.favSubjects = attrs.favSubjects;
+		this.assignments = attrs.assignments;
 		this.grade = attrs.grade;
 	}
 	listsSubjects() {
@@ -102,6 +107,13 @@ class Student extends Person {
 		} else {
 			return `${this.name} has too low of a grade to graduate.`;
 		}
+	}
+	getGrade() {
+		let total = 0;
+		for (let i = 0; i < this.assignments.length; i++) {
+			total += this.assignments[i];
+		}
+		this.grade = total / this.assignments.length;
 	}
 }
 
@@ -144,7 +156,8 @@ const steve = new Student({
 	previousBackground: 'Some College',
 	className: 'Web23',
 	favSubjects: [ 'Math', 'Computer Science' ],
-	grade: 80
+	assignments: [],
+	grade: 0
 });
 
 const billy = new ProjectManager({
@@ -180,17 +193,11 @@ console.log(billy.debugsCode(steve, 'HTML'));
 
 console.log(steve.graduate());
 
-fred.gradeWork(steve);
-console.log(steve.graduate());
-fred.gradeWork(steve);
-console.log(steve.graduate());
-fred.gradeWork(steve);
-console.log(steve.graduate());
-fred.gradeWork(steve);
-console.log(steve.graduate());
-fred.gradeWork(steve);
-console.log(steve.graduate());
-fred.gradeWork(steve);
-console.log(steve.graduate());
-fred.gradeWork(steve);
+for (let i = 0; i < 200; i++) {
+	fred.gradeWork(steve);
+}
+
+steve.getGrade();
+console.log(steve.assignments);
+console.log(steve.grade);
 console.log(steve.graduate());
